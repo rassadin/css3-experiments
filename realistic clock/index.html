@@ -1,0 +1,594 @@
+<!doctype html>
+<html>
+<head>
+<!-- Copyright 2013 Nik Rassadin <rassadin@gmail.com>
+	 Content is licensed under CC BY-NC-SA 3.0 -->
+<style>
+
+/*** Font for numbers ***/
+@font-face {
+    font-family: 'WallClock';
+    src: url('wallclock.eot');
+    }
+
+@font-face {
+    font-family: 'WallClock';
+    src: url('wallclock.woff') format('woff'), url('wallclock.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'WallClockPS';
+    src: url('wallclock.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+/*** Clock rules. Pure CSS ***/
+#clock {
+	transition: all 0.5s easy;
+}
+#a {
+	width:100em;
+	height:100em;
+	position:relative;
+	border-radius:50em;
+	background:#eee;
+	box-shadow:
+		inset 0.5em -0.5em 0 #ccc,
+		inset 1.7em -1.7em 0 #555,
+		inset -0.3em -0.4em 0 #999,
+		inset -0.3em 0.2em 0 #ccc,
+		inset -1em -1em 0 #555,
+		1em 3em 2em rgba(0,0,0,0.3);
+}
+#b {
+	width:94em;
+	height:94em;
+	top:3em;
+	left:3em;
+	position:relative;
+	border-radius:47em;
+	background:#fff;
+	box-shadow:
+		inset 0.4em 0 0 #fff,
+		inset 0 -0.6em 0 #ddd,
+		inset 1.6em -0.8em 0 #222,
+		inset -1.6em 0.8em 0 #222,
+		inset 2em 2em 0 #222,
+		0.6em -0.3em 0 #999,
+		-1em 1em 0 #777,
+		-1.3em -2em 0 #fff,
+		1.3em 2em 0 #222,
+		1.3em 3em 0 #999;
+}
+#c {
+	width:89em;
+	height:89em;
+	top:2.5em;
+	left:2.5em; 
+	position:relative;
+	border-radius:44.5em;
+	background:#f4f5f6;
+	box-shadow:
+		inset 0.5em 1em 0.5em rgba(0,0,0,0.4),
+		inset 1em 2em 2em rgba(0,0,0,0.3),
+		inset 0 0.5em 3em rgba(0,0,0,0.1),
+		-1.6em 0.8em 0 #444,
+		1.6em -0.8em 0 #444;
+}
+#d { width:88em;
+	 height:88em;
+	 top:0.5em;
+	 left:0.5em;
+	 position:relative;
+	 border-radius:44em;
+}
+#e { width:81.8em;
+	 height:81.8em;
+	 padding-top:40.9em;
+	 box-sizing: border-box;
+	 -moz-box-sizing: border-box;
+	 -webkit-box-sizing: border-box;
+	 left:2.9em;
+	 top:2.9em;
+	 position:absolute;
+	 border:solid 0.4em #777;
+	 border-radius:40.9em;  
+}
+#ii {
+	padding-left:43.4em;
+	position:absolute;
+}
+b, i {
+	height:82em; 
+	position:absolute;
+	border:solid 0 #222;
+	border-width:3em 0;
+	display:block;
+}
+b {
+	width:1.2em;
+}
+i {
+	width:0.2em;
+}
+b>i,i>i {
+	transform:rotate(6deg) ;
+	margin-top:-3em;
+}
+b>b  {
+	transform:rotate(30deg);
+	margin-top:-3em; }
+b>i {
+	left:0.3em;
+}
+
+#f,#g {
+	font:12em/1.0em WallClock, sans-serif;
+	text-align:center;
+	width:6.8em;
+    color:#222;
+}
+#g>u>u {	
+	letter-spacing:0.1em;
+}
+#g>u>u>u {
+	letter-spacing:0;
+}
+u {
+	display:block;
+	line-height:1em;
+	text-decoration: none;
+}
+u>u>u>u {
+	margin:0.5em -0.55em;
+	padding: 0 0.05em;
+}
+u>u>u {
+	margin:0.0em -1.75em;
+	padding: 0 0.7em;
+}
+u>u {
+	margin:-0.55em 0;
+	text-align:right;
+	padding: 0 1.65em;
+}
+#f {
+	margin-top:-3.37em;
+}
+#g {
+	margin-top:-6em;
+}
+#g u>u {
+	text-align:left;
+}
+
+#q { 
+	font:2.2em/1em Segoe UI,Helvetica,sans-serif;
+	text-align:center;
+	margin-top:-11.5em;
+	color:#555;
+}
+.ss, .mm, .hh {
+	width:80em;
+	height:80em;
+	top:4em;
+	left:4em;
+	position:absolute;
+}
+.hh {
+	transform:rotate(-55deg);
+}
+.mm {
+	transform:rotate(60deg);
+}
+.ss {
+	animation: tick 1s normal infinite linear;
+ }
+@keyframes tick {
+	0% { transform: rotate(0deg); }
+	8.3% { transform:rotate(5.5deg); }
+	100% { transform: rotate(0deg); }		
+}
+.s {
+	width:1em;
+	height:48em; 
+	top:6em;
+	left:39.5em;
+	position:relative; 
+	background:#a00;
+	outline: 1px solid transparent; 
+	animation: a360_10 60s normal infinite linear; 
+}
+.sr {
+	width:3em;
+	height:3em;
+	background:#a00;
+	margin:-9.5em 0 0 38.4em;
+	border-radius:1.5em;
+}
+@keyframes a360_10  {
+	0% { transform: translate(0, 10em) rotate(0deg) translate(0,-10em) }
+	100% { transform: translate(0, 10em) rotate(360deg) translate(0,-10em) }
+}
+
+.m {
+	height:48em;
+	left:38.9em;
+	width:2.2em;
+	position:relative;
+	background:#222;
+	border:0 0 32em 0;
+	animation: a36016 3600s normal infinite linear;
+	outline: 1px solid transparent;
+}
+@keyframes a36016 {
+	0% { transform: translate(0, 16em) rotate(0deg) translate(0,-16em); }
+	100% { transform: translate(0, 16em) rotate(360deg) translate(0,-16em); }
+}
+
+.mr {
+	width:5em;
+	height:5em;
+	background:#222;
+	margin:-10.5em 0 0 37.4em;
+	border-radius:2.5em;
+}
+.h { 
+	width:3em;
+	height:34em;
+	left:38.5em;
+	position:relative; 
+	background:#222;
+	margin-top:13em; 
+	outline: 1px solid transparent;
+	animation: a36010 43200s normal infinite linear;
+}
+#sh {
+	width:80em;
+	height:80em;
+	top:2em;
+	left:1em;
+	position:absolute;
+}
+#sh .s, #sh .m, #sh .h, #sh .mr  {
+	background:#ddd;
+	box-shadow:0 0 0.5em #ddd, 0 0 0.25em #ddd;
+}
+#k {
+	width:88em;
+	height:88em;
+	position:absolute;
+	border-radius:44em;
+	box-shadow:inset 4.5em 9em 0.5em rgba(250,252,253,0.2);
+}
+/* Vendor CSS prefixes */
+#css3prefixed:checked ~ #clock {
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+}
+#css3prefixed:checked ~ #clock b>i,
+#css3prefixed:checked ~ #clock i>i,
+#css3fixed:checked ~ #clock b>i,
+#css3fixed:checked ~ #clock i>i {
+	-ms-transform:rotate(6deg);
+	-webkit-transform:rotate(6deg);
+}
+#css3prefixed:checked ~ #clock b>b,
+#css3fixed:checked ~ #clock b>b  {
+	-ms-transform:rotate(30deg);
+	-webkit-transform:rotate(30deg);
+}
+#css3prefixed:checked ~ #clock .hh,
+#css3fixed:checked ~ #clock .hh {
+	-webkit-transform:rotate(-55deg);
+}
+#css3prefixed:checked ~ #clock .mm,
+#css3fixed:checked ~ #clock .mm {
+	-webkit-transform:rotate(60deg);
+}
+#css3prefixed:checked ~ #clock .ss,
+#css3fixed:checked ~ #clock .ss {
+	-webkit-animation: tick 1s normal infinite linear;
+}
+@-webkit-keyframes tick {
+	0% { -webkit-transform: rotate(0deg); }
+	8.3% { -webkit-transform: rotate(5.5deg); }
+	100% { -webkit-transform: rotate(0deg); }		
+}
+#css3prefixed:checked ~ #clock .s,
+#css3fixed:checked ~ #clock .s {
+	-webkit-animation: a360_10 60s normal infinite linear; 
+}
+@-webkit-keyframes a360_10 {
+	0% { -webkit-transform: translate(0, 10em) rotate(0deg) translate(0,-10em) }
+	100% { -webkit-transform: translate(0, 10em) rotate(360deg) translate(0,-10em) }
+}
+#css3prefixed:checked ~ #clock .m,
+#css3fixed:checked ~ #clock .m {
+	-webkit-animation: a36016 3600s normal infinite linear;
+}
+@-webkit-keyframes a36016 {
+	0% { -webkit-transform: translate(0, 16em) rotate(0deg) translate(0,-16em); }
+	50% { -webkit-transform: translate(0, 16em) rotate(180deg) translate(0,-16em); }
+	100% { -webkit-transform: translate(0, 16em) rotate(360deg) translate(0,-16em); }
+}
+#css3prefixed:checked ~ #clock .h,
+#css3fixed:checked ~ #clock .hh {
+	-webkit-animation: a36010 43200s normal infinite linear;
+}
+
+
+/* Fixes */
+
+#css3fixed:checked ~ #clock {
+	transition:none;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+}
+
+.fixed { display:none; }
+
+/* Following will fix problems with cascaded transformations
+	are critical in Safari, Mobile Safari, Opera,
+	non-critical in Chrome and Firefox */
+</style><!--[if !IE]> --><style>
+#css3fixed:checked ~ #clock .fixed { display:block; }
+#css3fixed:checked ~ #clock .pure { display:none; }
+</style><!-- <![endif]--><style>
+
+
+#css3fixed:checked ~ #clock b:nth-child(2) {
+	transform:rotate(30deg);
+	-webkit-transform:rotate(30deg);
+}
+#css3fixed:checked ~ #clock b:nth-child(3) {
+	transform:rotate(60deg);
+	-webkit-transform:rotate(60deg);
+}
+#css3fixed:checked ~ #clock b:nth-child(4) {
+	transform:rotate(90deg);
+	-webkit-transform:rotate(90deg);
+}
+#css3fixed:checked ~ #clock b:nth-child(5) {
+	transform:rotate(120deg);
+	-webkit-transform:rotate(120deg);
+}
+#css3fixed:checked ~ #clock b:nth-child(6) {
+	transform:rotate(150deg);
+	-webkit-transform:rotate(150deg);
+}
+#css3fixed:checked ~ #clock i:nth-child(2) {
+	transform:rotate(12deg);
+	-webkit-transform:rotate(12deg);
+}
+#css3fixed:checked ~ #clock i:nth-child(3) {
+	transform:rotate(18deg);
+	-webkit-transform:rotate(18deg);
+}
+#css3fixed:checked ~ #clock i:nth-child(4) {
+	transform:rotate(24deg);
+	-webkit-transform:rotate(24deg);
+}
+/* Opera rotation fix */
+#css3fixed:checked ~ #clock .s {
+	animation: a360_10of 60s normal infinite linear; 
+}
+@keyframes a360_10of {
+	0% {  transform: translate(0, 10em) rotate(0deg) translate(0,-10em);
+		-o-transform: translate(0, 3.2em) rotate(0deg) translate(0,-3.2em) }
+	100% { transform: translate(0, 10em) rotate(360deg) translate(0,-10em);
+		-o-transform: translate(0, 3.2em) rotate(360deg) translate(0,-3.2em) }
+}
+#css3fixed:checked ~ #clock #g {
+-webkit-transform: translate(0,-0.05em);
+}
+#css3fixed:checked ~ #clock #f,
+#css3fixed:checked ~ #clock #g {
+	font:12em/1em WallClockPS, sans-serif;
+}
+/* Clock size selection */
+
+#clock { font-size:5px; }	 
+#size25percent:checked ~ #clock { font-size:25% }
+#size250px:checked ~ #clock { font-size:2.5px }
+#size500px:checked ~ #clock { font-size:5px }
+#size10em:checked ~ #clock { font-size:0.1em }
+#size25percent:checked ~ #clock { font-size:25% }
+
+/* Controls */
+input {
+	width:1em; position:relative; valign:top;
+}
+input[type=checkbox] {
+	left:0.2em;
+}
+input + label {
+	padding:0.2em 0.4em 0.3em 1.4em;
+	margin-left:-1.4em;
+	border-radius:0.3em;
+	transition: background 0.5s;
+	-webkit-transition: background 0.5s;
+	-moz-transition: background 0.5s;
+	-o-transition: background 0.5s;
+}
+input:checked + label {
+	background: #ABD8F2;
+}
+input, label {
+	line-height:1.8em;
+}
+label {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Page contents styles */
+html,body { 
+	height: 100%;
+	margin:0;
+	padding:0;
+	background:#eee;
+}
+.contents:before {
+	position:absolute;
+	top:0;
+	left:0;
+	height:250px;
+	width:100%;
+	background:linear-gradient(135deg, #579ED4, #0D58B3);
+	background: -moz-radial-gradient(40% 80%, circle farthest-side, #579ED4 0%, #0D58B3 50%, #0D58B3 100%);
+	background: -webkit-radial-gradient(40% 80%, circle farthest-side, #579ED4 0%, #0D58B3 50%, #0D58B3 100%);
+	content:'';
+	box-shadow:0 0 20px #000;
+}
+.contents {
+	height:100%;
+	padding:0 5% 0 50%;
+	background:linear-gradient(135deg, #fff, #eee);
+	background: -moz-radial-gradient(40% 10%, circle farthest-side, #fff 0%, #eee 80%, #eee 100%);
+	background: -webkit-radial-gradient(40% 10%, circle farthest-side, #fff 0%, #eee 80%, #eee 100%);	
+}
+#clock {
+	position:absolute;
+	right:55%;
+	top:50px;
+	display:block;
+}
+h1 { margin-top:-2em;
+	padding-top:250px;
+	position:relative;
+	z-index:100;
+	font: bold 2.8em Calibri,Arial,Helvetica,sans-serif;
+	letter-spacing:-1px;
+	margin-bottom:0;
+	text-shadow:
+		-1px -1px 0px rgba(0,0,0,0.8),
+		1px 1px 0px rgba(0,0,0,0.3);
+	color:#eee;
+}
+h2 {
+	font: 0.9em Calibri, Arial,Helvetica,sans-serif;
+	margin:0 0 4em 0;
+	position:relative;
+	z-index:100;
+	text-transform:uppercase;
+	color:#fff;
+}
+body, p {
+	font: 1em "Segoe UI", Helvetica, sans-serif;
+}
+#clock {
+	margin-top:4em;
+}
+#css3icon { position:absolute; top:2em; right:10em; font-size:0.9em; }
+</style>
+<link href="http://tezla.ru/rassadin/realistic-clock/" rel="stylesheet" type="text/css" />
+<link href="http://github/css3icon-white.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="contents">
+<h1>Wall Clock Pure CSS3</h1>
+<h2>No scripts. No images. No SVG. Pure CSS3.</h2>
+
+<p>Demo is coded with CSS3 Recommendation syntax.
+You can select compatibility level to see how your
+browser performs to standards:</p>
+
+<input type="radio" id="css3pure" name="css3"/><label for="css3pure">CSS3 Syntax</label><br/>
+<input type="radio" id="css3prefixed" name="css3"/><label for="css3prefixed">With CSS vendor prefixes</label><br/>
+<input type="radio" id="css3fixed" name="css3" checked="checked"/><label for="css3fixed">Option above plus browser-specific fixes (if found)</label><br/>
+
+<p>Clock size by default set to 100em, so it can be scaled down by altering container's font size.
+You can choose one of following clock sizes to check and see more bugs (: </p>
+
+<input type="radio" id="size500px" name="size" checked="checked"/><label for="size500px">500 pixels</label>
+<input type="radio" id="size250px" name="size"/><label for="size250px">250 pixels</label>
+<input type="radio" id="size25percent" name="size"/><label for="size25percent">25 percents</label>
+<input type="radio" id="size10em" name="size"/><label for="size10em">10 em-units</label>
+
+<p>
+Links:<br/>
+<a href="https://github.com/rassadin/css3-experiments">Source on Github</a></br/>
+</p>
+<p><a href="http://codepen.io/rassadin/pen/cvJmb">Demonstration at codepen.io</a></br/>
+<a href="http://cssdeck.com/labs/realistic-clock">Demonstration at cssdeck.com</a></br/>
+</p>
+<p>&copy;2013 Nik Rassadin CC BY-NC-SA 3.0</p>
+
+<div id="clock">
+	<div id="a">
+		<div id="b">
+			<div id="c">
+				<div id="d">
+					<div id="sh">
+						<div class="hh">
+							<div class="h"></div>
+						</div>
+						<div class="mm">
+							<div class="m"></div>
+							<div class="mr"></div>
+						</div>
+						<div class="ss">
+							<div class="s"></div>
+						</div>
+					</div>
+					<div id="ii">
+						<div class="pure">
+						<b><i><i><i><i></i></i></i></i>
+							<b><i><i><i><i></i></i></i></i>
+								<b><i><i><i><i></i></i></i></i>
+									<b><i><i><i><i></i></i></i></i>
+										<b><i><i><i><i></i></i></i></i>
+											<b><i><i><i><i></i></i></i></i></b>
+										</b>
+									</b>
+								</b>
+							</b>
+						</b></div>
+						<!-- this is need only to show 
+							bugs-free variant in many browsers -->
+						<div class="fixed">
+						<b><i></i><i></i><i></i><i></i></b>
+						<b><i></i><i></i><i></i><i></i></b>
+						<b><i></i><i></i><i></i><i></i></b>
+						<b><i></i><i></i><i></i><i></i></b>
+						<b><i></i><i></i><i></i><i></i></b>
+						<b><i></i><i></i><i></i><i></i></b>
+						</div>
+						<!-- till here -->
+					</div>
+					<div id="e">
+						<div id="f">
+							<u>12<u>1<u>2<u>3</u>4</u>5</u></u>
+						</div>
+						<div id="g">
+							<u><u>11<u>10<u>9</u>8</u>7</u>6</u>
+						</div>
+						<div id="q">quartz</div>
+					</div>
+					<div class="hh">
+						<div class="h"></div>
+					</div>
+					<div class="mm">
+						<div class="m"></div>
+						<div class="mr"></div>
+					</div>
+					<div class="ss">
+						<div class="s"></div>
+						<div class="sr"></div>
+					</div>
+					<div id="k"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="css3icon"/>
+</body>
+</html>
