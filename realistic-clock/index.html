@@ -266,6 +266,7 @@ u>u {
 #css3prefixed:checked ~ #clock {
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 }
 #css3prefixed:checked ~ #clock b>i,
@@ -372,6 +373,12 @@ u>u {
 	transform:rotate(24deg);
 	-webkit-transform:rotate(24deg);
 }
+/* IE10 fix */
+#css3fixed:checked ~  #clock i, #css3fixed:checked ~ #clock b {
+	border-left:solid 0.1px rgba(255,255,255,.05);
+	border-right:solid 0.1px rgba(255,255,255,.05);
+}
+
 /* Opera rotation fix */
 #css3fixed:checked ~ #clock .s {
 	animation: a360_10of 60s normal infinite linear; 
@@ -499,7 +506,7 @@ body #css3icon {
 </head>
 <body>
 <div class="contents">
-<h1>Realistic Clock in Pure CSS3</h1>
+<h1>Wall Clock Pure CSS3</h1>
 <h2>No scripts. No images. No SVG. Pure CSS3.</h2>
 
 <p>Demo is coded with CSS3 Recommendation syntax.
