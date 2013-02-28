@@ -9,23 +9,22 @@
 @font-face {
     font-family: 'WallClock';
     src: url('wallclock.eot');
-    }
-
+}
 @font-face {
     font-family: 'WallClock';
-    src: url('wallclock.woff') format('woff'), url('wallclock.otf') format('opentype');
+    src: url('wallclock.woff') format('woff'), url('wallclock.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-@font-face {
+/*@font-face {
     font-family: 'WallClockPS';
     src: url('wallclock.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-}
+}*/
 /*** Clock rules. Pure CSS ***/
 #clock {
-	transition: all 0.5s easy;
+	transition: all 0.5s ease;
 }
 #a {
 	width:100em;
@@ -183,12 +182,12 @@ u>u {
 	transform:rotate(60deg);
 }
 .ss {
-	animation: tick 1s normal infinite linear;
+	animation: tick 1s normal infinite steps(25,end);
  }
 @keyframes tick {
 	0% { transform: rotate(0deg); }
-	8.3% { transform:rotate(5.5deg); }
-	100% { transform: rotate(0deg); }		
+	12% { transform:rotate(6deg); }
+	100% { transform: rotate(6deg); }		
 }
 .s {
 	width:1em;
@@ -198,7 +197,7 @@ u>u {
 	position:relative; 
 	background:#a00;
 	outline: 1px solid transparent; 
-	animation: a360_10 60s normal infinite linear; 
+	animation: a360_10 60s normal infinite steps(60,end); 
 }
 .sr {
 	width:3em;
@@ -219,7 +218,7 @@ u>u {
 	position:relative;
 	background:#222;
 	border:0 0 32em 0;
-	animation: a36016 3600s normal infinite linear;
+	animation: a36016 3600s normal infinite steps(3600,end);
 	outline: 1px solid transparent;
 }
 @keyframes a36016 {
@@ -242,7 +241,7 @@ u>u {
 	background:#222;
 	margin-top:13em; 
 	outline: 1px solid transparent;
-	animation: a36010 43200s normal infinite linear;
+	animation: a36010 43200s normal infinite steps(43200,end);
 }
 #sh {
 	width:80em;
@@ -253,7 +252,7 @@ u>u {
 }
 #sh .s, #sh .m, #sh .h, #sh .mr  {
 	background:#ddd;
-	box-shadow:0 0 0.5em #ddd, 0 0 0.25em #ddd;
+	xbox-shadow:0 0 0.5em #ddd, 0 0 0.25em #ddd;
 }
 #k {
 	width:88em;
@@ -273,12 +272,10 @@ u>u {
 #css3prefixed:checked ~ #clock i>i,
 #css3fixed:checked ~ #clock b>i,
 #css3fixed:checked ~ #clock i>i {
-	-ms-transform:rotate(6deg);
 	-webkit-transform:rotate(6deg);
 }
 #css3prefixed:checked ~ #clock b>b,
 #css3fixed:checked ~ #clock b>b  {
-	-ms-transform:rotate(30deg);
 	-webkit-transform:rotate(30deg);
 }
 #css3prefixed:checked ~ #clock .hh,
@@ -291,16 +288,16 @@ u>u {
 }
 #css3prefixed:checked ~ #clock .ss,
 #css3fixed:checked ~ #clock .ss {
-	-webkit-animation: tick 1s normal infinite linear;
+	-webkit-animation: tick 1s normal infinite steps(25,end);
 }
 @-webkit-keyframes tick {
 	0% { -webkit-transform: rotate(0deg); }
-	8.3% { -webkit-transform: rotate(5.5deg); }
-	100% { -webkit-transform: rotate(0deg); }		
+	12% { -webkit-transform:rotate(6deg); }
+	100% { -webkit-transform: rotate(6deg); }	
 }
 #css3prefixed:checked ~ #clock .s,
 #css3fixed:checked ~ #clock .s {
-	-webkit-animation: a360_10 60s normal infinite linear; 
+	-webkit-animation: a360_10 60s normal infinite steps(60,end); 
 }
 @-webkit-keyframes a360_10 {
 	0% { -webkit-transform: translate(0, 10em) rotate(0deg) translate(0,-10em) }
@@ -308,7 +305,7 @@ u>u {
 }
 #css3prefixed:checked ~ #clock .m,
 #css3fixed:checked ~ #clock .m {
-	-webkit-animation: a36016 3600s normal infinite linear;
+	-webkit-animation: a36016 3600s normal infinite steps(3600,end);
 }
 @-webkit-keyframes a36016 {
 	0% { -webkit-transform: translate(0, 16em) rotate(0deg) translate(0,-16em); }
@@ -317,7 +314,7 @@ u>u {
 }
 #css3prefixed:checked ~ #clock .h,
 #css3fixed:checked ~ #clock .hh {
-	-webkit-animation: a36010 43200s normal infinite linear;
+	-webkit-animation: a36010 43200s normal infinite steps(43200,end);
 }
 
 
@@ -374,14 +371,16 @@ u>u {
 	-webkit-transform:rotate(24deg);
 }
 /* IE10 fix */
-#css3fixed:checked ~  #clock i, #css3fixed:checked ~  #clock b {
-	border-left:solid 0px #fff;
-	border-right:solid 0px #fff;
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	#css3fixed:checked ~  #clock i, #css3fixed:checked ~  #clock b {
+		border-left:solid 0px #fff;
+		border-right:solid 0px #fff;
+	}
 }
 
 /* Opera rotation fix */
 #css3fixed:checked ~ #clock .s {
-	animation: a360_10of 60s normal infinite linear; 
+	animation: a360_10of 60s normal infinite steps(60,end); 
 }
 @keyframes a360_10of {
 	0% {  transform: translate(0, 10em) rotate(0deg) translate(0,-10em);
@@ -389,13 +388,20 @@ u>u {
 	100% { transform: translate(0, 10em) rotate(360deg) translate(0,-10em);
 		-o-transform: translate(0, 3.2em) rotate(360deg) translate(0,-3.2em) }
 }
-#css3fixed:checked ~ #clock #g {
--webkit-transform: translate(0,-0.05em);
+
+/* Chrome/Windows antialiasing bug.
+ Temporary turning it off because it causes CPU overhead by PostScript Font*/
+/*@media screen and (-webkit-min-device-pixel-ratio:0) {
+	#css3fixed:checked ~ #clock #f,
+	#css3fixed:checked ~ #clock #g {
+		font:12em/1em WallClockPS, sans-serif;
+	}
+	#css3fixed:checked ~ #clock #g {
+		-webkit-transform: translate(0,-0.05em);
+	}
 }
-#css3fixed:checked ~ #clock #f,
-#css3fixed:checked ~ #clock #g {
-	font:12em/1em WallClockPS, sans-serif;
-}
+*/
+
 /* Clock size selection */
 
 #clock { font-size:5px; }	 
@@ -471,7 +477,7 @@ h1 { margin-top:-2em;
 	padding-top:250px;
 	position:relative;
 	z-index:100;
-	font: bold 2.8em Calibri,Arial,Helvetica,sans-serif;
+	font: bold 2.6em Calibri,Arial,Helvetica,sans-serif;
 	letter-spacing:-1px;
 	margin-bottom:0;
 	text-shadow:
@@ -501,7 +507,7 @@ body #css3icon {
 	font-size:0.9em;
 }
 </style>
-<link href="http://tezla.ru/rassadin/realistic-clock/" rel="stylesheet" type="text/css" />
+<link href="http://tezla.ru/rassadin/realistic-clock/a" rel="stylesheet" type="text/css" />
 <link href="http://rassadin.github.com/css3icon/css3icon-white.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
