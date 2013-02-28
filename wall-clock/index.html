@@ -16,12 +16,12 @@
     font-weight: normal;
     font-style: normal;
 }
-/*@font-face {
+@font-face {
     font-family: 'WallClockPS';
     src: url('wallclock.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-}*/
+}
 /*** Clock rules. Pure CSS ***/
 #clock {
 	transition: all 0.5s ease;
@@ -389,9 +389,8 @@ u>u {
 		-o-transform: translate(0, 3.2em) rotate(360deg) translate(0,-3.2em) }
 }
 
-/* Chrome/Windows antialiasing bug.
- Temporary turning it off because it causes CPU overhead by PostScript Font*/
-/*@media screen and (-webkit-min-device-pixel-ratio:0) {
+/* Chrome/Windows antialiasing bug. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
 	#css3fixed:checked ~ #clock #f,
 	#css3fixed:checked ~ #clock #g {
 		font:12em/1em WallClockPS, sans-serif;
@@ -400,7 +399,6 @@ u>u {
 		-webkit-transform: translate(0,-0.05em);
 	}
 }
-*/
 
 /* Clock size selection */
 
@@ -507,7 +505,7 @@ body #css3icon {
 	font-size:0.9em;
 }
 </style>
-<link href="http://tezla.ru/rassadin/realistic-clock/" rel="stylesheet" type="text/css" />
+<link href="http://tezla.ru/rassadin/wall-clock/" rel="stylesheet" type="text/css" />
 <link href="http://rassadin.github.com/css3icon/css3icon-white.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
