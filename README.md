@@ -1,4 +1,5 @@
 css3-experiments
 ================
 
-A collection of my CSS demos and technology previews
+WallClock CSS3 Demo link
+http://rassadin.github.io/css3-experiments
